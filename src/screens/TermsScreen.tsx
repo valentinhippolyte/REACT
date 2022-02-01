@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View,StyleSheet, Text, Image, ScrollView } from "react-native";
+import { View, StyleSheet, Text, Image, ScrollView } from "react-native";
 import { Appbar, Colors, Title } from "react-native-paper";
 
 const TermsScreen = () => {
@@ -111,10 +111,10 @@ const TermsScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    test: {
-      backgroundColor: Colors.white,
-    },
-  });
-  
+  test: {
+    backgroundColor: Colors.white,
+  },
+});
+
 export default TermsScreen;
 

@@ -1,23 +1,35 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, StatusBar, View } from "react-native";
+import { StyleSheet, Text, StatusBar, View } from "react-native";
 import { FlatList } from "react-native";
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Title, Paragraph, ActivityIndicator} from 'react-native-paper';
 
-import { data } from "../../api/data";
+import { useStarships } from "../hooks/useStarships";
 
-const App = () => {
+const FeedScreen = () => {
+
+    const { isLoading, isError, data } = useStarships();
+
+    if (isLoading) {
+        return (
+            <ActivityIndicator>Is loading</ActivityIndicator>
+        )
+        
+    }
+    if (isError) {
+        return <Text>Error !!!!</Text>;
+    }
     const renderItem = ({ item }) => {
         console.log({ item });
         return (
             <Card>
                 <Card.Content>
                     <Title>Card title</Title>
-                     <Paragraph>Card content</Paragraph>
+                    <Paragraph>Card content</Paragraph>
 
-                    <Paragraph>{item.name} </Paragraph> 
-                  <Paragraph>{item.model} </Paragraph>
+                    <Paragraph>{item.name} </Paragraph>
+                    <Paragraph>{item.model} </Paragraph>
                     <Paragraph> {item.manufacturer} </Paragraph>
-                     <Paragraph> {item.cost_in_credits} </Paragraph>
+                    <Paragraph> {item.cost_in_credits} </Paragraph>
                     <Paragraph> {item.length} </Paragraph>
                     <Paragraph> {item.max_atmosphering_screen} </Paragraph>
                     <Paragraph> {item.crew} </Paragraph>
@@ -31,13 +43,13 @@ const App = () => {
         );
     };
     return (
-        <SafeAreaView style={styles.safeContainer}>
+        <>
             <FlatList
                 data={data.results}
                 renderItem={renderItem}
                 keyExtractor={(props) => props.name}
             />
-        </SafeAreaView>
+        </>
     );
 };
 
@@ -52,4 +64,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default App;
+export default FeedScreen;
+
+
+
